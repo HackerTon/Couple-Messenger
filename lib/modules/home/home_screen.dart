@@ -19,7 +19,7 @@ class HomeScreen extends BaseScreen {
             Stack(
               children: [
                 Image.asset(
-                  'images/splashscreen.png',
+                  'assets/splashscreen.png',
                   fit: BoxFit.contain,
                 ),
                 const Positioned(child: Text("Couple Messaging"))

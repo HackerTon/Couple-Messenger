@@ -36,6 +36,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/logo.jpg"
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +72,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#resolution-aware
 
   assets:
-    - images/
+    - assets/
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
