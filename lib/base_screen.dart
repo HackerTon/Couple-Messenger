@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BaseScreen extends StatelessWidget {
+abstract class BaseScreen<T> extends GetView<T> {
   const BaseScreen({super.key});
 
-  Widget? body(BuildContext context) => null;
+  PreferredSize? appBar() => null;
+  Widget body(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(),
       body: body(context),
     );
   }

@@ -1,7 +1,9 @@
-import 'package:couple_messaging/base_screen.dart';
-import 'package:couple_messaging/modules/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../base_screen.dart';
+import '../chat/chat_screen.dart';
+import 'home_view_model.dart';
 
 class HomeScreen extends BaseScreen {
   final HomeViewModel viewModel = Get.put(HomeViewModel());
@@ -9,25 +11,22 @@ class HomeScreen extends BaseScreen {
   HomeScreen({super.key});
 
   @override
-  Widget? body(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: Colors.amber[100],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+  Widget body(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Stack(
           children: [
-            Stack(
-              children: [
-                Image.asset(
-                  'assets/splashscreen.png',
-                  fit: BoxFit.contain,
-                ),
-                const Positioned(child: Text("Couple Messaging"))
-              ],
+            InkWell(
+              onTap: () => Get.to(() => ChatScreen()),
+              child: Image.asset(
+                'assets/splashscreen.png',
+                fit: BoxFit.contain,
+              ),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }
