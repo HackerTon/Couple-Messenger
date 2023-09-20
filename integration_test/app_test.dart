@@ -5,7 +5,25 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:couple_messaging/modules/home/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
+import 'package:integration_test/integration_test.dart';
+
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  testWidgets(
+    'testhome',
+    (widgetTester) async {
+      await widgetTester.pumpWidget(GetMaterialApp(home: HomeScreen()));
+      final image = find.byKey(const Key('image'));
+      expect(image, findsOneWidget);
+      await widgetTester.tap(image);
+    },
+  );
+
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
   //   await tester.pumpWidget(const Home());
