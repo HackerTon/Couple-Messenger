@@ -22,8 +22,6 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     TextFieldStyle defaultStyle = Theme.of(context).extension<TextFieldStyle>()!;
     Color? backgroundColor = textFieldStyle?.backgroundColor ?? defaultStyle.backgroundColor;
-
-    debugPrint(hint);
     return Container(
       padding: const EdgeInsets.all(DimenConfig.standardSize),
       margin: const EdgeInsets.all(5),

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   flutter_launcher_icons: ^0.13.1
+  firebase_core: ^2.16.0
 
 flutter_icons:
   android: "launcher_icon"
