@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../base_screen.dart';
 import '../../configuration/dimenconfig.dart';
+import '../../widgets/theme_icon_button.dart';
+import '../../widgets/theme_input_field.dart';
 import 'chat_view_model.dart';
 
 class ChatScreen extends BaseScreen<ChatViewmodel> {
@@ -28,54 +30,28 @@ class ChatScreen extends BaseScreen<ChatViewmodel> {
             ),
           ),
         ),
-        InputField(
-          textInputController: messageInputController,
-          onChanged: (String text) => controller.textMessage.value = messageInputController.text,
+        Container(
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
+            border: Border.symmetric(
+              vertical: BorderSide(),
+              horizontal: BorderSide(),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: InputField(
+                  textInputController: messageInputController,
+                  onChanged: (String text) => controller.textMessage.value = messageInputController.text,
+                ),
+              ),
+              const ThemeIconButton(icon: Icon(Icons.send)),
+            ],
+          ),
         ),
       ],
-    );
-  }
-}
-
-class InputField extends StatelessWidget {
-  final TextEditingController textInputController;
-  final void Function(String text)? onChanged;
-  final String hint = 'write_message_here'.tr;
-
-  InputField({
-    super.key,
-    required this.textInputController,
-    this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    debugPrint(hint);
-    return Container(
-      padding: const EdgeInsets.all(DimenConfig.standardSize),
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1.5,
-          color: Colors.black87,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: TextField(
-        autocorrect: true,
-        scribbleEnabled: true,
-        textCapitalization: TextCapitalization.sentences,
-        controller: textInputController,
-        onChanged: onChanged,
-        cursorOpacityAnimates: true,
-        cursorRadius: const Radius.circular(20),
-        cursorWidth: 5,
-        style: const TextStyle(color: Colors.black),
-        decoration: InputDecoration.collapsed(
-          hintText: hint,
-        ),
-        cursorColor: Colors.black,
-      ),
     );
   }
 }
