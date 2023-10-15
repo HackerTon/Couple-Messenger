@@ -34,9 +34,11 @@ class ChatScreen extends BaseScreen<ChatViewmodel> {
           padding: const EdgeInsets.all(5),
           margin: const EdgeInsets.all(5),
           decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(),
-              horizontal: BorderSide(),
+            border: Border(
+              top: BorderSide(width: 1.8),
+              bottom: BorderSide(width: 7.5),
+              right: BorderSide(width: 7.5),
+              left: BorderSide(width: 1.8),
             ),
           ),
           child: Row(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../configuration/dimenconfig.dart';
-import '../modules/app/screen/app.dart';
+import '../configuration/style.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController textInputController;

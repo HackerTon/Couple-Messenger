@@ -5,6 +5,6 @@ class ThemeTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () {}, child: Text('hello'));
+    return TextButton(onPressed: () {}, child: const Text('hello'));
   }
 }

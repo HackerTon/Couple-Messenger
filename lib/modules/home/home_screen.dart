@@ -20,7 +20,7 @@ class HomeScreen extends BaseScreen {
             InkWell(
               onTap: () => Get.to(() => ChatScreen()),
               child: Image.asset(
-                key: Key('image'),
+                key: const Key('image'),
                 'assets/splashscreen.png',
                 fit: BoxFit.contain,
               ),
