@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-const List<ThemeExtension<dynamic>> themeExtension = [
+const List<ThemeExtension<dynamic>> themeExtensionLight = [
   TextFieldStyle(
     backgroundColor: Colors.black,
+  ),
+];
+
+const List<ThemeExtension<dynamic>> themeExtensionDark = [
+  TextFieldStyle(
+    backgroundColor: Colors.white,
   ),
 ];
 

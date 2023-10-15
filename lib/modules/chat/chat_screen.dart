@@ -8,13 +8,13 @@ import '../../widgets/theme_input_field.dart';
 import 'chat_view_model.dart';
 
 class ChatScreen extends BaseScreen<ChatViewmodel> {
-  final TextEditingController messageInputController = TextEditingController();
-
-  ChatScreen({super.key});
+  const ChatScreen({super.key});
 
   @override
   Widget body(BuildContext context) {
     Get.put(ChatViewmodel());
+    ThemeData themeData = Theme.of(context);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -33,23 +33,37 @@ class ChatScreen extends BaseScreen<ChatViewmodel> {
         Container(
           padding: const EdgeInsets.all(5),
           margin: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(width: 1.8),
-              bottom: BorderSide(width: 7.5),
-              right: BorderSide(width: 7.5),
-              left: BorderSide(width: 1.8),
+              top: BorderSide(
+                width: 1.8,
+                color: themeData.primaryColor,
+              ),
+              bottom: BorderSide(
+                width: 7.5,
+                color: themeData.primaryColor,
+              ),
+              right: BorderSide(
+                width: 7.5,
+                color: themeData.primaryColor,
+              ),
+              left: BorderSide(
+                width: 1.8,
+                color: themeData.primaryColor,
+              ),
             ),
           ),
           child: Row(
             children: [
               Expanded(
                 child: InputField(
-                  textInputController: messageInputController,
-                  onChanged: (String text) => controller.textMessage.value = messageInputController.text,
+                  onChanged: (String text) => controller.textMessage.value = text,
                 ),
               ),
-              const ThemeIconButton(icon: Icon(Icons.send)),
+              ThemeIconButton(
+                icon: const Icon(Icons.send),
+                onPressed: () => Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark),
+              ),
             ],
           ),
         ),

@@ -16,7 +16,11 @@ class App extends StatelessWidget {
     return SafeArea(
       child: GetMaterialApp(
         theme: ThemeData(
-          extensions: themeExtension,
+          primarySwatch: Colors.purple,
+          extensions: themeExtensionLight,
+        ),
+        darkTheme: ThemeData.dark().copyWith(
+          extensions: themeExtensionDark,
         ),
         defaultTransition: Transition.cupertino,
         home: HomeScreen(),

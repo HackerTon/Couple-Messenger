@@ -5,7 +5,7 @@ import '../configuration/dimenconfig.dart';
 import '../configuration/style.dart';
 
 class InputField extends StatelessWidget {
-  final TextEditingController textInputController;
+  final TextEditingController? textInputController;
   final void Function(String text)? onChanged;
   final String hint = 'write_message_here'.tr;
 
@@ -13,22 +13,21 @@ class InputField extends StatelessWidget {
 
   InputField({
     super.key,
-    required this.textInputController,
+    this.textInputController,
     this.textFieldStyle,
     this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    TextFieldStyle defaultStyle = Theme.of(context).extension<TextFieldStyle>()!;
-    Color? backgroundColor = textFieldStyle?.backgroundColor ?? defaultStyle.backgroundColor;
+    ThemeData themeData = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(DimenConfig.standardSize),
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.5,
-          color: backgroundColor,
+          color: textFieldStyle?.backgroundColor ?? themeData.primaryColor,
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -46,11 +45,10 @@ class InputField extends StatelessWidget {
           cursorOpacityAnimates: true,
           cursorRadius: const Radius.circular(20),
           cursorWidth: 5,
-          style: const TextStyle(color: Colors.black),
           decoration: InputDecoration.collapsed(
             hintText: hint,
           ),
-          cursorColor: Colors.black,
+          cursorColor: themeData.primaryColor,
         ),
       ),
     );
