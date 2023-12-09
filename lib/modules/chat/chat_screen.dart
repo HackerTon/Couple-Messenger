@@ -32,17 +32,10 @@ class MessagesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget? listBuilder(BuildContext context, int index) {
       ChatMessageModel chatMessage = viewmodel.chatsRx[index];
-      bool isMyself = chatMessage.uid == 'somebody';
+      bool isMyself = chatMessage.uid == viewmodel.uid;
       if (isMyself) {
         return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: CircleAvatar(
-                child: Text(chatMessage.uid.characters.toList()[0]),
-              ),
-            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(
@@ -61,11 +54,24 @@ class MessagesWidget extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: CircleAvatar(
+                child: Text(chatMessage.uid.characters.toList()[0]),
+              ),
+            ),
           ],
         );
       }
       return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: CircleAvatar(
+              child: Text(chatMessage.uid.characters.toList()[0]),
+            ),
+          ),
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(
@@ -84,17 +90,21 @@ class MessagesWidget extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: CircleAvatar(
-              child: Text(chatMessage.uid.characters.toList()[0]),
-            ),
-          ),
         ],
       );
     }
 
-    Widget separatorBuilder(BuildContext context, int index) => const SizedBox(height: 10);
+    Widget separatorBuilder(BuildContext context, int index) {
+      if (index + 1 > viewmodel.chatsRx.length) {
+        return const SizedBox(height: 10);
+      }
+
+      if (viewmodel.chatsRx[index + 1].uid != viewmodel.chatsRx[index].uid) {
+        return const SizedBox(height: 25);
+      }
+
+      return const SizedBox(height: 10);
+    }
 
     return Expanded(
       child: Padding(

@@ -33,7 +33,7 @@ class ChatViewmodel extends GetxController {
   }
 
   void initializeChatMessageStream() async {
-    chatsRx.addAll(await _chatRespository.getMessages());
+    // chatsRx.addAll(await _chatRespository.getMessages());
     _chatRespository.getMessagesStream().listen((chatMessage) => chatsRx.add(chatMessage));
   }
 
@@ -54,7 +54,7 @@ class ChatViewmodel extends GetxController {
   void messageJumpToEnd() {
     messageScrollController.animateTo(
       messageScrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.fastOutSlowIn,
     );
   }
