@@ -7,9 +7,8 @@ import '../../home/home_screen.dart';
 import '../viewmodel/app_viewmodel.dart';
 
 class App extends StatelessWidget {
-  final AppViewmodel viewModel = Get.put(AppViewmodel());
-
   App({super.key});
+  final AppViewmodel viewModel = Get.put(AppViewmodel());
 
   @override
   Widget build(BuildContext context) {
