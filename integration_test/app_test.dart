@@ -17,7 +17,7 @@ void main() {
   testWidgets(
     'testhome',
     (widgetTester) async {
-      await widgetTester.pumpWidget(GetMaterialApp(home: HomeScreen()));
+      await widgetTester.pumpWidget(const GetMaterialApp(home: HomeScreen()));
       final image = find.byKey(const Key('image'));
       expect(image, findsOneWidget);
       await widgetTester.tap(image);

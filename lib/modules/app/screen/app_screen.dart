@@ -19,10 +19,11 @@ class App extends StatelessWidget {
           extensions: themeExtensionLight,
         ),
         darkTheme: ThemeData.dark().copyWith(
+          primaryColor: Colors.white,
           extensions: themeExtensionDark,
         ),
         defaultTransition: Transition.cupertino,
-        home: HomeScreen(),
+        home: const HomeScreen(),
         translations: Language(),
         locale: const Locale('en'),
       ),

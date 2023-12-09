@@ -69,12 +69,12 @@ class MessagesWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 24,
+                vertical: 10,
+                horizontal: 15,
               ),
               decoration: BoxDecoration(
                 color: ColorConfig.primaryColor,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
                 chatMessage.message,
@@ -85,9 +85,8 @@ class MessagesWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.only(left: 5),
             child: CircleAvatar(
-              maxRadius: 27,
               child: Text(chatMessage.uid.characters.toList()[0]),
             ),
           ),
