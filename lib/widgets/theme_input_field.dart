@@ -23,7 +23,7 @@ class InputField extends StatelessWidget {
     ThemeData themeData = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(DimenConfig.standardSize),
-      margin: const EdgeInsets.all(5),
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.5,

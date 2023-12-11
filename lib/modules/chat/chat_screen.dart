@@ -28,14 +28,16 @@ class MessagesWidget extends StatelessWidget {
   const MessagesWidget({super.key, required this.viewmodel});
   final ChatViewmodel viewmodel;
 
-  @override
-  Widget build(BuildContext context) {
-    Widget? listBuilder(BuildContext context, int index) {
-      ChatMessageModel chatMessage = viewmodel.chatsRx[index];
-      bool isMyself = chatMessage.uid == viewmodel.uid;
-      if (isMyself) {
-        return Row(
+  Widget? listBuilder(BuildContext context, int index) {
+    ChatMessageModel chatMessage = viewmodel.chatsRx[index];
+    bool isMyself = chatMessage.uid == viewmodel.uid;
+    bool isEndOfList = index + 1 == viewmodel.chatsRx.length;
+    if (isMyself) {
+      return Padding(
+        padding: isEndOfList ? const EdgeInsets.only(bottom: 32) : const EdgeInsets.only(),
+        child: Row(
           children: [
+            const SizedBox(width: 45),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(
@@ -44,7 +46,7 @@ class MessagesWidget extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: ColorConfig.primaryColor,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
                 ),
                 child: Text(
                   chatMessage.message,
@@ -61,9 +63,12 @@ class MessagesWidget extends StatelessWidget {
               ),
             ),
           ],
-        );
-      }
-      return Row(
+        ),
+      );
+    }
+    return Padding(
+      padding: isEndOfList ? const EdgeInsets.only(bottom: 32) : const EdgeInsets.only(),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -76,11 +81,11 @@ class MessagesWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
-                horizontal: 15,
+                horizontal: 10,
               ),
               decoration: BoxDecoration(
                 color: ColorConfig.primaryColor,
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
               ),
               child: Text(
                 chatMessage.message,
@@ -90,25 +95,29 @@ class MessagesWidget extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(width: 45),
         ],
-      );
-    }
+      ),
+    );
+  }
 
-    Widget separatorBuilder(BuildContext context, int index) {
-      if (index + 1 > viewmodel.chatsRx.length) {
-        return const SizedBox(height: 10);
-      }
-
-      if (viewmodel.chatsRx[index + 1].uid != viewmodel.chatsRx[index].uid) {
-        return const SizedBox(height: 25);
-      }
-
+  Widget separatorBuilder(BuildContext context, int index) {
+    if (index + 1 > viewmodel.chatsRx.length) {
       return const SizedBox(height: 10);
     }
 
+    if (viewmodel.chatsRx[index + 1].uid != viewmodel.chatsRx[index].uid) {
+      return const SizedBox(height: 25);
+    }
+
+    return const SizedBox(height: 10);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Obx(() {
           return ListView.separated(
             controller: viewmodel.messageScrollController,
@@ -130,8 +139,8 @@ class MessageInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(5),
+      // padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(

@@ -33,11 +33,12 @@ class ChatViewmodel extends GetxController {
   }
 
   void initializeChatMessageStream() async {
-    // chatsRx.addAll(await _chatRespository.getMessages());
-    _chatRespository.getMessagesStream().listen((chatMessage) => chatsRx.add(chatMessage));
+    _chatRespository.getMessagesStream().listen((chatMessage) {
+      chatsRx.add(chatMessage);
+    });
   }
 
-  void addChatMessage(String fromwho, String message) async {
+  Future<void> addChatMessage(String fromwho, String message) async {
     await _chatRespository.sendMessage(fromwho, message);
   }
 
@@ -53,17 +54,17 @@ class ChatViewmodel extends GetxController {
 
   void messageJumpToEnd() {
     messageScrollController.animateTo(
-      messageScrollController.position.maxScrollExtent,
+      messageScrollController.position.maxScrollExtent + 250,
       duration: const Duration(milliseconds: 100),
       curve: Curves.fastOutSlowIn,
     );
   }
 
   void actionSend() async {
-    if (textMessageRx.isEmpty) return;
+    if (textMessageRx.trim().isEmpty) return;
     await playPopSound();
-    addChatMessage(uid, textMessageRx.value);
-    cleartextMessage();
+    await addChatMessage(uid, textMessageRx.value);
     messageJumpToEnd();
+    cleartextMessage();
   }
 }
