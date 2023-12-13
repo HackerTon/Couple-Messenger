@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get_storage/get_storage.dart';
@@ -33,7 +34,13 @@ class ChatViewmodel extends GetxController {
   }
 
   void initializeChatMessageStream() async {
-    _chatRespository.getMessagesStream().listen((chatMessage) {
+    // Get existing messages and load it
+    final existingMessages = await _chatRespository.getMessages();
+    chatsRx.addAll(existingMessages);
+    messageJumpToEnd();
+
+    // Attach listener to chatMessages
+    _chatRespository.getMessagesStream(existingMessages.last.key).listen((chatMessage) {
       chatsRx.add(chatMessage);
     });
   }
@@ -53,10 +60,14 @@ class ChatViewmodel extends GetxController {
   }
 
   void messageJumpToEnd() {
-    messageScrollController.animateTo(
-      messageScrollController.position.maxScrollExtent + 250,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.fastOutSlowIn,
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        messageScrollController.animateTo(
+          messageScrollController.position.maxScrollExtent + 150,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.fastOutSlowIn,
+        );
+      },
     );
   }
 

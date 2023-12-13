@@ -1,5 +1,6 @@
 class ChatMessageModel {
-  ChatMessageModel(this.uid, this.message);
+  ChatMessageModel(this.key, this.uid, this.message);
+  String key;
   String uid;
   String message;
 }

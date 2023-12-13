@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class AppViewmodel extends GetxController {
@@ -7,6 +9,10 @@ class AppViewmodel extends GetxController {
   void onInit() {
     super.onInit();
     initializeFirebaseAuthListener();
+    FlutterError.onError = (details) {
+      FlutterError.presentError(details);
+      if (kReleaseMode) exit(1);
+    };
   }
 
   void initializeFirebaseAuthListener() {

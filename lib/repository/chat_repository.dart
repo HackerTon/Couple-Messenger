@@ -5,19 +5,23 @@ import '../model/chat_message.dart';
 class ChatRespository {
   final FirebaseDatabase _firebaseDatabase = FirebaseDatabase.instance;
 
-  ChatMessageModel toChatMessage(Object chatMessageObject) {
+  ChatMessageModel toChatMessage(String? key, Object chatMessageObject) {
     Map<Object?, Object?> chatMessageMap = chatMessageObject as Map<Object?, Object?>;
-    return ChatMessageModel(chatMessageMap['uid'].toString(), chatMessageMap['message'].toString());
+    return ChatMessageModel(
+      key ?? '',
+      chatMessageMap['uid'].toString(),
+      chatMessageMap['message'].toString(),
+    );
   }
 
   Future<List<ChatMessageModel>> getMessages() async {
     DatabaseEvent event = await _firebaseDatabase.ref().once();
-    return event.snapshot.children.map((e) => toChatMessage(e.value!)).toList();
+    return event.snapshot.children.map((e) => toChatMessage(e.key, e.value!)).toList();
   }
 
-  Stream<ChatMessageModel> getMessagesStream() {
-    return _firebaseDatabase.ref().onChildAdded.map((event) {
-      return toChatMessage(event.snapshot.value!);
+  Stream<ChatMessageModel> getMessagesStream(String key) {
+    return _firebaseDatabase.ref().orderByKey().startAfter(key).onChildAdded.map((event) {
+      return toChatMessage(event.snapshot.key, event.snapshot.value!);
     });
   }
 

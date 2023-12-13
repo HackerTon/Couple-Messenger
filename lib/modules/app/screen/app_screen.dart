@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../configuration/style.dart';
 import '../../../configuration/translation.dart';
 import '../../home/home_screen.dart';
-import '../viewmodel/app_viewmodel.dart';
+import '../viewmodel/app_view_model.dart';
 
 class App extends StatelessWidget {
   App({super.key});

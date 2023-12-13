@@ -46,7 +46,7 @@ class MessagesWidget extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: ColorConfig.primaryColor,
-                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(15), right: Radius.circular(10)),
                 ),
                 child: Text(
                   chatMessage.message,
@@ -85,7 +85,7 @@ class MessagesWidget extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: ColorConfig.primaryColor,
-                borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
+                borderRadius: const BorderRadius.horizontal(right: Radius.circular(15), left: Radius.circular(10)),
               ),
               child: Text(
                 chatMessage.message,
